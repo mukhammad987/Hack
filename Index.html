@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HACKER TERMINAL v2.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Сайдбар -->
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="avatar">USER_</div>
+                <h3 id="playerName">ANONYMOUS</h3>
+                <div class="level">УРОВЕНЬ: <span id="level">1</span></div>
+            </div>
+            
+            <div class="stats">
+                <h4><i class="fas fa-chart-line"></i> СТАТИСТИКА</h4>
+                <div class="stat">
+                    <span>ХАКИНГ:</span>
+                    <div class="bar"><div class="fill" id="hackingBar" style="width: 10%"></div></div>
+                    <span id="hackingSkill">10%</span>
+                </div>
+                <div class="stat">
+                    <span>СКРИПТЫ:</span>
+                    <div class="bar"><div class="fill" id="scriptingBar" style="width: 5%"></div></div>
+                    <span id="scriptingSkill">5%</span>
+                </div>
+                <div class="stat">
+                    <span>ФИШИНГ:</span>
+                    <div class="bar"><div class="fill" id="phishingBar" style="width: 0%"></div></div>
+                    <span id="phishingSkill">0%</span>
+                </div>
+                <div class="stat">
+                    <span>БРУТФОРС:</span>
+                    <div class="bar"><div class="fill" id="bruteBar" style="width: 0%"></div></div>
+                    <span id="bruteSkill">0%</span>
+                </div>
+            </div>
+            
+            <div class="resources">
+                <h4><i class="fas fa-coins"></i> РЕСУРСЫ</h4>
+                <div class="resource">
+                    <i class="fas fa-server"></i> BTC: <span id="btc">0.0001</span>
+                </div>
+                <div class="resource">
+                    <i class="fas fa-dollar-sign"></i> $: <span id="money">100</span>
+                </div>
+                <div class="resource">
+                    <i class="fas fa-shield-alt"></i> АНОНИМНОСТЬ: <span id="anon">85%</span>
+                </div>
+                <div class="resource">
+                    <i class="fas fa-microchip"></i> БОТНЕТ: <span id="botnet">1</span>
+                </div>
+            </div>
+            
+            <div class="tools">
+                <h4><i class="fas fa-tools"></i> ИНСТРУМЕНТЫ</h4>
+                <button class="tool-btn" onclick="useTool('nmap')" id="nmapBtn">
+                    <i class="fas fa-search"></i> Nmap
+                </button>
+                <button class="tool-btn" onclick="useTool('sqlmap')" id="sqlmapBtn" disabled>
+                    <i class="fas fa-database"></i> SQLmap
+                </button>
+                <button class="tool-btn" onclick="useTool('metasploit')" id="metasploitBtn" disabled>
+                    <i class="fas fa-bomb"></i> Metasploit
+                </button>
+                <button class="tool-btn" onclick="useTool('wireless')" id="wirelessBtn" disabled>
+                    <i class="fas fa-wifi"></i> Aircrack
+                </button>
+            </div>
+            
+            <div class="missions">
+                <h4><i class="fas fa-tasks"></i> МИССИИ</h4>
+                <div class="mission-list" id="missionList">
+                    <!-- Динамически заполняется -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Основной терминал -->
+        <div class="main">
+            <div class="terminal-header">
+                <div class="tab active" onclick="switchTab('terminal')">
+                    <i class="fas fa-terminal"></i> ТЕРМИНАЛ
+                </div>
+                <div class="tab" onclick="switchTab('market')">
+                    <i class="fas fa-shopping-cart"></i> ЧЁРНЫЙ РЫНОК
+                </div>
+                <div class="tab" onclick="switchTab('targets')">
+                    <i class="fas fa-crosshairs"></i> ЦЕЛИ
+                </div>
+                <div class="tab" onclick="switchTab('wallet')">
+                    <i class="fas fa-wallet"></i> КОШЕЛЁК
+                </div>
+            </div>
+            
+            <!-- Терминал -->
+            <div class="terminal" id="terminalTab">
+                <div class="output" id="output">
+                    <div class="line">
+                        <span class="prompt">root@hacker:~#</span> <span class="command">welcome</span>
+                    </div>
+                    <div class="response">
+                        ╔═══════════════════════════════════════╗<br>
+                        ║      ДОБРО ПОЖАЛОВАТЬ В HACKER OS     ║<br>
+                        ║          ВЕРСИЯ 2.0 - NIGHTMARE       ║<br>
+                        ╚═══════════════════════════════════════╝<br><br>
+                        > Инициализация системы...<br>
+                        > Загрузка инструментов...<br>
+                        > Соединение с TOR... УСПЕШНО<br>
+                        > Ваш IP: 192.168.44.129 -> 7f3b:d4c:22a:1::f3b<br>
+                        > Готов к работе.<br><br>
+                        Доступные команды: help, scan, hack, phish, brute, mine, clear<br>
+                        Для справки введите: help [command]
+                    </div>
+                </div>
+                <div class="input-line">
+                    <span class="prompt">root@hacker:~#</span>
+                    <input type="text" id="commandInput" autocomplete="off" autofocus>
+                </div>
+            </div>
+            
+            <!-- Чёрный рынок -->
+            <div class="market hidden" id="marketTab">
+                <h3><i class="fas fa-shopping-cart"></i> ЧЁРНЫЙ РЫНОК</h3>
+                <div class="market-items">
+                    <div class="item" onclick="buyItem('vpn', 50)">
+                        <h4>ПРЕМИУМ VPN</h4>
+                        <p>+10% анонимности</p>
+                        <div class="price">$50</div>
+                    </div>
+                    <div class="item" onclick="buyItem('exploit', 200)">
+                        <h4>ЭКСПЛОЙТ КИТ</h4>
+                        <p>+5% к хакингу</p>
+                        <div class="price">$200</div>
+                    </div>
+                    <div class="item" onclick="buyItem('server', 500)">
+                        <h4>СЕРВЕР БОТНЕТА</h4>
+                        <p>+5 ботов в сеть</p>
+                        <div class="price">$500</div>
+                    </div>
+                    <div class="item" onclick="buyItem('zeroday', 1000)">
+                        <h4>ZERO-DAY УЯЗВИМОСТЬ</h4>
+                        <p>Автоматический взлом</p>
+                        <div class="price">$1000</div>
+                    </div>
+                    <div class="item" onclick="buyItem('miner', 300)">
+                        <h4>БИТКОИН МАЙНЕР</h4>
+                        <p>+0.001 BTC/час</p>
+                        <div class="price">$300</div>
+                    </div>
+                    <div class="item" onclick="buyItem('antivirus', 150)">
+                        <h4>АНТИВИРУС</h4>
+                        <p>Защита от обнаружения</p>
+                        <div class="price">$150</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Цели -->
+            <div class="targets hidden" id="targetsTab">
+                <h3><i class="fas fa-crosshairs"></i> ДОСТУПНЫЕ ЦЕЛИ</h3>
+                <div class="targets-grid" id="targetsGrid">
+                    <!-- Динамически заполняется -->
+                </div>
+            </div>
+            
+            <!-- Кошелёк -->
+            <div class="wallet hidden" id="walletTab">
+                <h3><i class="fas fa-wallet"></i> КРИПТОКОШЕЛЁК</h3>
+                <div class="crypto-info">
+                    <div class="crypto">
+                        <i class="fab fa-bitcoin"></i>
+                        <div>
+                            <h4>BITCOIN</h4>
+                            <div class="amount" id="btcAmount">0.0001 BTC</div>
+                        </div>
+                        <button class="mine-btn" onclick="startMining()">МАЙНИТЬ</button>
+                    </div>
+                    <div class="transactions">
+                        <h4>ПОСЛЕДНИЕ ОПЕРАЦИИ</h4>
+                        <div class="transaction-list" id="transactions">
+                            <!-- Динамически заполняется -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Лог событий -->
+        <div class="log">
+            <h4><i class="fas fa-history"></i> ЛОГ СОБЫТИЙ</h4>
+            <div class="log-content" id="logContent">
+                <div>> Система инициализирована</div>
+                <div>> Подключение к сети... OK</div>
+                <div>> Анонимизация... 85%</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно взлома -->
+    <div class="modal hidden" id="hackModal">
+        <div class="modal-content">
+            <h3>ВЗЛОМ СИСТЕМЫ: <span id="targetName"></span></h3>
+            <div class="hack-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="hackProgress" style="width: 0%"></div>
+                </div>
+                <div class="progress-text" id="hackStatus">Инициализация...</div>
+            </div>
+            <div class="hack-log" id="hackLog">
+                <!-- Лог взлома -->
+            </div>
+            <button class="cancel-btn" onclick="cancelHack()">ОТМЕНА</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
