@@ -1,0 +1,447 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+body {
+    background: #0a0a0a;
+    color: #00ff00;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* Сайдбар */
+.sidebar {
+    width: 300px;
+    background: #111;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    background: #00ff00;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto 10px;
+}
+
+h3 {
+    color: #00ff00;
+    margin-bottom: 5px;
+}
+
+.level {
+    background: #222;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+/* Статистика */
+.stats, .resources, .tools, .missions {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+h4 {
+    color: #00ff00;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #222;
+    border-radius: 4px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: #00ff00;
+    border-radius: 4px;
+    transition: width 0.5s;
+}
+
+/* Ресурсы */
+.resource {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 8px;
+    background: #222;
+    border-radius: 4px;
+}
+
+/* Кнопки инструментов */
+.tool-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: #222;
+    color: #00ff00;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.tool-btn:hover:not(:disabled) {
+    background: #00ff00;
+    color: #000;
+}
+
+.tool-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Миссии */
+.mission-list {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.mission {
+    background: #222;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border-left: 3px solid #00ff00;
+    font-size: 14px;
+}
+
+.mission.completed {
+    border-left-color: #00ffff;
+    opacity: 0.7;
+}
+
+/* Основной терминал */
+.main {
+    flex-grow: 1;
+    background: #111;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.terminal-header {
+    display: flex;
+    background: #222;
+    border-bottom: 1px solid #00ff00;
+}
+
+.tab {
+    padding: 15px 20px;
+    cursor: pointer;
+    border-right: 1px solid #333;
+    transition: all 0.3s;
+}
+
+.tab:hover, .tab.active {
+    background: #00ff00;
+    color: #000;
+}
+
+/* Терминал */
+.terminal {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    font-family: 'Courier New', monospace;
+}
+
+.output {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.line {
+    margin-bottom: 10px;
+}
+
+.prompt {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.command {
+    color: #ffffff;
+}
+
+.response {
+    color: #00ffff;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+}
+
+#commandInput {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 5px 10px;
+    outline: none;
+    font-family: 'Courier New', monospace;
+}
+
+/* Чёрный рынок, цели, кошелёк */
+.market, .targets, .wallet {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.market-items, .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.item, .target {
+    background: #222;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.item:hover, .target:hover {
+    border-color: #00ff00;
+    transform: translateY(-3px);
+}
+
+.item h4, .target h4 {
+    color: #00ffff;
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #00ff00;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.target.difficulty-easy { border-left: 5px solid #00ff00; }
+.target.difficulty-medium { border-left: 5px solid #ffff00; }
+.target.difficulty-hard { border-left: 5px solid #ff0000; }
+
+/* Кошелёк */
+.crypto-info {
+    display: flex;
+    gap: 30px;
+}
+
+.crypto {
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 300px;
+}
+
+.crypto i {
+    font-size: 50px;
+    color: #ff9900;
+}
+
+.amount {
+    font-size: 24px;
+    color: #00ff00;
+    margin: 10px 0;
+}
+
+.mine-btn {
+    background: #ff9900;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.mine-btn:hover {
+    background: #ffcc00;
+}
+
+/* Лог событий */
+.log {
+    width: 300px;
+    background: #111;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.log-content {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #00ffff;
+}
+
+.log-content div {
+    padding: 5px 0;
+    border-bottom: 1px solid #222;
+}
+
+/* Модальное окно взлома */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #111;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 30px;
+    width: 600px;
+    max-width: 90%;
+}
+
+.hack-progress {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 20px;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #00ffff);
+    border-radius: 10px;
+    transition: width 0.5s;
+}
+
+.hack-log {
+    background: #000;
+    color: #00ffff;
+    padding: 15px;
+    border-radius: 5px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    margin: 15px 0;
+}
+
+.cancel-btn {
+    background: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    float: right;
+}
+
+/* Анимации */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.glitch {
+    animation: glitch 0.3s infinite;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00cc00;
+}
